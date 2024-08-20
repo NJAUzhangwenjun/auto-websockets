@@ -2,6 +2,7 @@ pyautogen==0.2.34
 matplotlib
 yfinance
 pyautogen[websockets]==0.2.34
+pyautogen[autobuild]==0.2.34
 fastapi
 uvicorn
 streamlit
