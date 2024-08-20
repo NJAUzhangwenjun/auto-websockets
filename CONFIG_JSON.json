@@ -1,0 +1,9 @@
+[
+  {
+    "model": "gpt-3.5-turbo",
+    "api_type": "azure"
+  },
+  {
+    "model": "gpt-4"
+  }
+]

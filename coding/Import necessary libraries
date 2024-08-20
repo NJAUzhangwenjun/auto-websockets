@@ -1,0 +1,39 @@
+# Import necessary libraries
+import pandas_datareader as pdr
+from datetime import datetime
+
+# Get today's date
+today = datetime.now().strftime("%Y-%m-%d")
+print(f"Today's date is {today}.")
+
+# Define the function to fetch YTD return
+def get_ytd_return(ticker):
+    start_date = f"{datetime.now().year}-01-01"
+    end_date = today
+    try:
+        data = pdr.get_data_yahoo(ticker, start=start_date, end=end_date)
+        if len(data) > 0:
+            start_price = data.iloc[0]["Close"]
+            end_price = data.iloc[-1]["Close"]
+            ytd_return = ((end_price - start_price) / start_price) * 100
+            return ytd_return
+        else:
+            return None
+    except Exception as e:
+        print(f"Failed to get ticker '{ticker}' reason: {e}")
+        return None
+
+# Fetch YTD returns for META and TESLA
+meta_ytd_return = get_ytd_return("META")
+tesla_ytd_return = get_ytd_return("TSLA")
+
+# Print the YTD returns
+if meta_ytd_return is not None:
+    print(f"META YTD Return: {meta_ytd_return:.2f}%")
+else:
+    print("Could not fetch META YTD Return.")
+
+if tesla_ytd_return is not None:
+    print(f"TESLA YTD Return: {tesla_ytd_return:.2f}%")
+else:
+    print("Could not fetch TESLA YTD Return.")
